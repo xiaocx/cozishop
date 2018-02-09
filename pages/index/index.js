@@ -12,7 +12,8 @@ Page({
     brands: [],
     floorGoods: [],
     banner: [],
-    channel: []
+    channel: [],
+    screenwidth:null
   },
   onShareAppMessage: function () {
     return {
@@ -40,6 +41,15 @@ Page({
   },
   onLoad: function (options) {
     this.getIndexData();
+
+    var that = this
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          screenwidth: res.screenWidth
+        })
+      }
+    }) 
   },
   onReady: function () {
     // 页面渲染完成
