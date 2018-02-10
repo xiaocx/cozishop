@@ -19,6 +19,8 @@ Page({
     userHasCollect: 0,
     number: 1,
     checkedSpecText: '请选择规格数量',
+    checkedSpecImage: null,
+    checkedSpecPrice: 0,
     openAttr: false,
     noCollectImage: "/static/images/icon_collect.png",
     hasCollectImage: "/static/images/icon_collect_checked.png",
@@ -57,6 +59,8 @@ Page({
     });
 
   },
+
+  //大家都在看
   getGoodsRelated: function () {
     let that = this;
     util.request(api.GoodsRelated, { id: that.data.id }).then(function (res) {
@@ -106,16 +110,20 @@ Page({
   getCheckedSpecValue: function () {
     let checkedValues = [];
     let _specificationList = this.data.specificationList;
+    let _productList = this.data.productList;
     for (let i = 0; i < _specificationList.length; i++) {
       let _checkedObj = {
         nameId: _specificationList[i].specification_id,
         valueId: 0,
-        valueText: ''
+        valueText: '',
+        valueImage:''
       };
       for (let j = 0; j < _specificationList[i].valueList.length; j++) {
         if (_specificationList[i].valueList[j].checked) {
           _checkedObj.valueId = _specificationList[i].valueList[j].id;
           _checkedObj.valueText = _specificationList[i].valueList[j].value;
+          _checkedObj.valueImage = _specificationList[i].valueList[j].pic_url;
+          _checkedObj.valuePrice = _productList[j].retail_price;
         }
       }
       checkedValues.push(_checkedObj);
@@ -156,6 +164,24 @@ Page({
     }).map(function (v) {
       return v.valueText;
     });
+    let checkedValueI = checkedNameValue.filter(function (v) {
+      if (v.valueId != 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }).map(function (v) {
+      return v.valueImage;
+    });
+    let checkedValueP = checkedNameValue.filter(function (v) {
+      if (v.valueId != 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }).map(function (v) {
+      return v.valuePrice;
+    });
     if (checkedValue.length > 0) {
       this.setData({
         'checkedSpecText': checkedValue.join('　')
@@ -163,6 +189,24 @@ Page({
     } else {
       this.setData({
         'checkedSpecText': '请选择规格数量'
+      });
+    }
+    if (checkedValueI.length > 0) {
+      this.setData({
+        'checkedSpecImage': checkedValueI.join('　')
+      });
+    } else {
+      this.setData({
+        'checkedSpecImage': null
+      });
+    }
+    if (checkedValueP.length > 0) {
+      this.setData({
+        'checkedSpecPrice': checkedValueP.join('　')
+      });
+    } else {
+      this.setData({
+        'checkedSpecPrice': 0
       });
     }
 

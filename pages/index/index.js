@@ -13,7 +13,8 @@ Page({
     floorGoods: [],
     banner: [],
     channel: [],
-    screenwidth:null
+    screenwidth:null,
+    inputvalue: "寻找属于你的cozi"
   },
   onShareAppMessage: function () {
     return {
@@ -62,5 +63,17 @@ Page({
   },
   onUnload: function () {
     // 页面关闭
+  },
+
+  bindfocusevent: function () {
+    this.setData({
+      inputvalue: null
+    })
+  },
+
+  bindblurevent: function () {
+    this.setData({
+      inputvalue: "寻找属于你的cozi"
+    })
   },
 })

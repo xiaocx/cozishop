@@ -384,7 +384,7 @@
   white-space: nowrap;
   display: flex;
   margin-top: 12px;
-  
+  margin-bottom: 12px;
 }
 
 
@@ -418,6 +418,47 @@
   flex-direction: column;
   
   
+}
+
+.foot_label {
+    
+    width: 100%;
+    background-color: #b6dcba;
+    display: flex;
+}
+.msg_input {
+    align-self: center;
+    height: 60%;
+    background-color: white;
+    border-radius: 10rem;
+    width:90%;
+    margin-left: 2.5%;
+    border-width: 1px;  
+    border-color: gainsboro;  
+    border-style: solid;
+    padding-left: 9%;
+}
+
+
+.containerback{
+  width: 100%;
+  margin-top: 12px;
+  display: flex;
+  position: relative;
+  
+}
+
+.containerback image{
+  width: 100%;
+  height: 100%;
+  
+}
+
+.search{
+  width:5%;
+  position: absolute;
+  margin-top: -9.5%;
+  margin-left: 5%;
 }
 
 

@@ -1,6 +1,20 @@
+<view class="foot_label" style='height:{{screenwidth/7}}px;'>
+  <input class="msg_input" placeholder="{{inputvalue}}" value="" placeholder-style="font-size:110%" confirm-type="search" bindblur='bindblurevent' bindfocus='bindfocusevent' />
+</view>
 
-<view wx:for="{{floorGoods}}" wx:key="{{item.id}}">
+<image class="search" src="http://dy.5y6s.com/cozi/首页素材/搜索框.png" mode="widthFix" />
+
+
+
+<view wx:for="{{floorGoods}}" wx:for-index="idx" wx:key="{{item.id}}">
+  <navigator url="/pages/category/category?id={{item.id}}" class="b">
+      <view class="containerback" style='height:{{screenwidth/26.46*16.3}}px;margin-top: 0px;' bindtap='fsdpclick'>
+        <image src="{{item.img_url}}" /> 
+      </view>
+  </navigator>
+
   <scroll-view class="scroll" scroll-x="true" style="height:{{screenwidth*0.40364}}px;" >
+
     <view class="scrollimage" style="width:{{screenwidth*0.2846}}px;height:{{screenwidth*0.40364}}px;"  wx:for="{{item.goodsList}}" wx:for-item="iitem" wx:key="{{iitem.id}}">
       <navigator url="../goods/goods?id={{iitem.id}}" class="b" >
         <image src="{{iitem.list_pic_url}}"></image>
@@ -19,4 +33,7 @@
       </navigator>
     </view >
   </scroll-view>
+  <view wx:if="{{idx == 0}}">
+    <image src="http://dy.5y6s.com/cozi/首页/名片.png" style="width:100%" mode="widthFix" />
+  </view>
 </view>
